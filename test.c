@@ -12,7 +12,6 @@ int main(int argc, char* argv[]) {
     //int i = load_count();
     
     int cpu_number = which_cpu();
-    printf("%d \n", cpu_number);    
     cpu_usage(cpu_number);
 }
 
@@ -34,24 +33,32 @@ int load_count(void){
     return i;
 }
 int which_cpu(){
-    char cpu_number = 0;
-    //0 is used in order to protect against bad input i.e. anything but 0-4
-    printf("Please enter a cpu number(1-4) or 0 for all cpu");
+    char cpu_number = 48;
+    //48 is used in order to protect against bad input i.e. anything but 0-4
+    printf("Please enter a cpu number(1-4) or 0 for all cpu ");
     scanf("%[0-4]", &cpu_number);
     return (int)(cpu_number-48);
 }
 
 void cpu_usage(int cpu_number){
-    printf("%d", cpu_number);
-    long double a[4], b[4], loadavg;
+    //printf("%d", cpu_number);
+    long double a[4], b[4], dump[10], loadavg;
     FILE *cpu_folder;
     cpu_folder = fopen("/proc/stat", "r");
+    for(int i = cpu_number; i>0; i--){
+        fscanf(cpu_folder, "%*s %Lf %Lf %Lf %Lf %Lf %Lf %Lf %Lf %Lf %Lf" ,&dump[0],&dump[1],&dump[2],&dump[3],&dump[4],&dump[5],&dump[6],&dump[7],&dump[8],&dump[9]);
+        printf("%Lf \n", dump[0]);
+    }    
     fscanf(cpu_folder, "%*s %Lf %Lf %Lf %Lf",&a[0],&a[1],&a[2],&a[3]);
+//    printf("%Lf \n", a[0]);
     fclose(cpu_folder);
     
     sleep(1);
 
     cpu_folder = fopen("/proc/stat","r");
+    for(int i = cpu_number; i>0; i--){
+        fscanf(cpu_folder, "%*s %Lf %Lf %Lf %Lf %Lf %Lf %Lf %Lf %Lf %Lf" ,&dump[0],&dump[1],&dump[2],&dump[3],&dump[4],&dump[5],&dump[6],&dump[7],&dump[8],&dump[9]);
+    }    
     fscanf(cpu_folder,"%*s %Lf %Lf %Lf %Lf",&b[0],&b[1],&b[2],&b[3]);
     fclose(cpu_folder);
 
