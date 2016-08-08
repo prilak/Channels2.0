@@ -1,43 +1,60 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-
+#include <unistd.h>
+void cpu_usage(int cpu_number);
 int load_count();
-int main(int argc, char* argv[]) {
-    
-  /*  clock_t start = clock(), diff;
-    printf("Backstreet's back, alright");
-    for(int x = 0; x<50; x++);
-    diff = clock() - start;
-    int msec = diff * 1000000 / CLOCKS_PER_SEC;
-    printf("Time is %d msec\n", msec);
+int which_cpu();
 
-*/
-/*    time_t current_time;
-    current_time = time(NULL);
-    char* time_now = ctime(&current_time);
-    printf("%s", time_now);
-*/
-    clock_t start = clock(), diff;
-    diff = clock() - start;
-   // printf("%ld \n", start);
-   // printf("%ld \n", diff);
-    int i = load_count();
-  //  printf("%ld", CLOCKS_PER_SEC);
+int main(int argc, char* argv[]) {
+    //clock_t start = clock(), diff;
+    //diff = clock() - start;
+    //int i = load_count();
+    
+    int cpu_number = which_cpu();
+    printf("%d \n", cpu_number);    
+    cpu_usage(cpu_number);
 }
 
+
+
 int load_count(void){
-    clock_t start = clock();
-    clock_t diff;
+    time_t start = clock();
+    time_t diff;
     int i;
     char a;
     char b = 0;
 
-    while(clock() - start < 500) {
-    //for(i = 0; diff<500; i++){
+    //while(clock() - start < 500) {
+    for(i = 0; diff<500; i++){
         a = b;
         diff = clock() - start;  
     }
-    printf("%d", i);
+   // printf("%d \n", i);
     return i;
+}
+int which_cpu(){
+    char cpu_number = 0;
+    //0 is used in order to protect against bad input i.e. anything but 0-4
+    printf("Please enter a cpu number(1-4) or 0 for all cpu");
+    scanf("%[0-4]", &cpu_number);
+    return (int)(cpu_number-48);
+}
+
+void cpu_usage(int cpu_number){
+    printf("%d", cpu_number);
+    long double a[4], b[4], loadavg;
+    FILE *cpu_folder;
+    cpu_folder = fopen("/proc/stat", "r");
+    fscanf(cpu_folder, "%*s %Lf %Lf %Lf %Lf",&a[0],&a[1],&a[2],&a[3]);
+    fclose(cpu_folder);
+    
+    sleep(1);
+
+    cpu_folder = fopen("/proc/stat","r");
+    fscanf(cpu_folder,"%*s %Lf %Lf %Lf %Lf",&b[0],&b[1],&b[2],&b[3]);
+    fclose(cpu_folder);
+
+    loadavg = ((b[0] + b[1] + b[2]) - (a[0] + a[1] + a[2])) / ((b[0] + b[1] + b[2] + b[3]) - (a[0] + a[1] + a[2] + a[3]));
+    printf("The current CPU utilization is : %Lf \n", loadavg); 
 }
