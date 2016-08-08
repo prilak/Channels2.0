@@ -5,6 +5,7 @@
 void cpu_usage(int cpu_number);
 int load_count();
 int which_cpu();
+//cool comment
 
 int main(int argc, char* argv[]) {
     //clock_t start = clock(), diff;
