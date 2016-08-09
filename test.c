@@ -2,11 +2,12 @@
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
-void cpu_usage(int cpu_number);
-int load_count();
-int which_cpu();
-//cool comment
-
+#include "covert.h"
+#include "test.h"
+//void cpu_usage(int cpu_number);
+//int load_count();
+//int which_cpu();
+//neat comment
 int main(int argc, char* argv[]) {
     //clock_t start = clock(), diff;
     //diff = clock() - start;
@@ -33,7 +34,7 @@ int load_count(void){
    // printf("%d \n", i);
     return i;
 }
-int which_cpu(){
+int which_cpu(void){
     char cpu_number = 48;
     //48 is used in order to protect against bad input i.e. anything but 0-4
     printf("Please enter a cpu number(1-4) or 0 for all cpu ");
