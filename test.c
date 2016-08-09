@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
     
     int cpu_number = which_cpu();
     cpu_usage(cpu_number);
+    int a = most_cpu_usage();
 }
 
 
