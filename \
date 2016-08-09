@@ -63,6 +63,7 @@ void cpu_usage(int cpu_number){
         cpu_access(cpu_folder, a);// this acts as the dump
     }    
     cpu_access(cpu_folder, a);
+    printf("%Lf", a[0]);
 //    printf("%Lf \n", a[0]);
     fclose(cpu_folder);
     
