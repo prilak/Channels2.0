@@ -57,7 +57,7 @@ int most_cpu_usage(){
         cpu_usage_highest_number = 4;
     
     }
-    printf("The busiest cpu is cpu%d with a usage of%Lf", cpu_usage_highest_number, cpu_usage_highest_value);
+    printf("The busiest cpu is cpu%d with a usage of %3Lf \n", cpu_usage_highest_number, cpu_usage_highest_value);
     return cpu_usage_highest_number;
 }
 
