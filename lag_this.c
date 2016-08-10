@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <unistd.h>
 void main(void){
-    int i = 0;
+    
     while(1){
+        sleep(1);
     }
 }

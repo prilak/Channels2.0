@@ -9,33 +9,39 @@
 //int which_cpu();
 //neat comment
 int main(int argc, char* argv[]) {
-    //clock_t start = clock(), diff;
-    //diff = clock() - start;
-    //int i = load_count();
-    
-    int cpu_number = which_cpu();
-    cpu_usage(cpu_number);
-    int a = most_cpu_usage();
-    long double b = epoch();
-    printf("%Lf\n", b);
+    int i = load_count();
+    printf("%d",i);
+    //int cpu_number = which_cpu();
+    //cpu_usage(cpu_number);
+    //int a = most_cpu_usage();
+    //long double b = epoch();
+    //printf("%Lf\n", b);
 }
 
 
 
 int load_count(void){
-    time_t start = clock();
+    time_t start = clock();// maybe remove declaration
     time_t diff;
-    int i;
+    int i; //dump[20000];
     char a;
     char b = 0;
-
-    //while(clock() - start < 500) {
-    for(i = 0; diff<500; i++){
-        a = b;
-        diff = clock() - start;  
+    FILE *dump_file = fopen("dump.txt", "w");
+    for(int again = 0; again<20000; again++){
+        start = clock();
+        for(i = 0; diff<500; i++){
+            a = b;
+            diff = clock() - start;  
+        }
+        //dump[again]=i;
+        fprintf(dump_file, "%d ", i);
+        diff = 0;
     }
-   // printf("%d \n", i);
-    return i;
+
+    //fwrite(dump, sizeof(int), 20000, dump_file);
+    fclose(dump_file);
+    
+    return 1;
 }
 int which_cpu(void){
     char cpu_number = 48;//48 is used in order to protect against bad input i.e. anything but 0-4
