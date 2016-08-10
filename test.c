@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     cpu_usage(cpu_number);
     int a = most_cpu_usage();
     long double b = epoch();
-    printf("%Lf", b);
+    printf("%Lf\n", b);
 }
 
 

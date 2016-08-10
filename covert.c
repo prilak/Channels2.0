@@ -51,8 +51,8 @@ int string_length(char *string){
     for(i = 0; *(string + i)!=0; i++);
     return i;
 }
-void scan_string(FILE *folder, char *search_string){
-    char *dump = NULL;
+long double scan_string(FILE *folder, char *search_string){
+    char dump[2000];
     long double dump_num[100];
     int i, ii;//iterator
    
@@ -61,16 +61,21 @@ void scan_string(FILE *folder, char *search_string){
     for(i=0; i<12; i++){
         
         //sscanf(folder, "%s", dump);
-        fgets(dump, sizeof(dump), folder);
-        printf("%s\n", dump);
+        fgets(dump, 2000, folder);
+        //printf("%s\n", dump);
         for(ii=0; ii<length; ii++){
             if(*(dump + ii)!=*(search_string + ii)){
                 found = 0;//not found
                 break;
             }
         }
-        if(ii==length)return;
-        fscanf(folder, " %*f");//dumps numbers that from other stats
+        if(ii==length){
+            puts(dump);
+            sscanf(dump, "%*s %Lf", &dump_num[0]);
+            return dump_num[0];
+        }
+        
+        //fscanf(folder, " %*f");//dumps numbers that from other stats
         //while(dump[0]!=search_string[0]){
         //    fscanf(folder, "%s %*Lf",&dump[0]);
         //    i++;
@@ -82,9 +87,15 @@ long double epoch(){
     long double seconds;
     cpu_folder = fopen("/proc/stat", "r");
     char *string = "btime";
-    scan_string(cpu_folder, string);
-    fscanf(cpu_folder, "%Lf", &seconds);
+    //char *epoch_time;
+    seconds = scan_string(cpu_folder, string);
+    fclose(cpu_folder);
+    //sscanf(epoch_time, "%*s %Lf", &seconds);
+
+    
+    //fscanf(cpu_folder, "%Lf", &seconds);
     return seconds;
+    //return 0;
 }
 
 
