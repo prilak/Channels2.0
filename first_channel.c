@@ -5,7 +5,7 @@
 //when i get the chance create a scanf that will request a binary code to be sent
 void binary_transmitter(char *digit);
 void main(){
-    char *data = "000000000011111111110000000000000000000000000000";
+    char *data = "0000000000111111111100000000000011111111111111111110000000000000000";
     binary_transmitter(data);    
 }
 void binary_transmitter(char *digit){
@@ -17,7 +17,14 @@ void binary_transmitter(char *digit){
         start = clock();
         for(i=0; diff<500; i++){
             if(digit[ii]=='0')a = b;
-            else asm("nop");
+            else{ 
+                asm("nop");
+                asm("nop");
+                asm("nop");
+                asm("nop"); 
+                asm("nop");
+                asm("nop");
+            }
             diff = clock() - start;
         }
     }
