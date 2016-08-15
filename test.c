@@ -33,12 +33,11 @@ int load_count(void){
             a = b;
             diff = clock() - start;  
         }
-        //dump[again]=i;
         fprintf(dump_file, "%d ", i);
         diff = 0;
+        if(again==200)system("taskset -c 0 ./first_channel");//here is the transmitter
     }
 
-    //fwrite(dump, sizeof(int), 20000, dump_file);
     fclose(dump_file);
     
     return 1;
