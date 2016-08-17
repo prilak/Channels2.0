@@ -26,21 +26,24 @@ int load_count(void){
     int i, dump[20000];
     char a;
     char b = 0;
+    sleep(1);
     FILE *dump_file = fopen("dump.txt", "w");
     for(int again = 0; again<2000; again++){
+        
         start = clock();
+        diff = 0;
         for(i = 0; diff<500; i++){
             a = b;
             diff = clock() - start;  
         }
-
-        if(again==1000){
-            system("taskset -c 0 ./first_channel");//here is the transmitter
-            dump[again] = 0;//shows where the transmitter begins in the .txt file
-        }
-        else dump[again] = i;
+        if(again%200==0)printf("1 \n");
+//        if(again==1000){
+//            system("taskset -c 0 ./first_channel");//here is the transmitter
+//            dump[again] = 0;//shows where the transmitter begins in the .txt file
+//        }
+        dump[again] = i;
         
-        diff = 0;
+        //diff = 0;
     }
     for(i=0;i<2000;i++){
         fprintf(dump_file, "%d ", dump[i]);

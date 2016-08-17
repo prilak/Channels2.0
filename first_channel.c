@@ -3,29 +3,94 @@
 #include <time.h>
 #include <unistd.h>
 //when i get the chance create a scanf that will request a binary code to be sent
-void binary_transmitter(char *digit);
+char digit[100] = "0000000000111111111100000000000011111111111111111110000000000000000";
+void binary_transmitter();
 void main(){
-    char *data = "0000000000111111111100000000000011111111111111111110000000000000000";
-    binary_transmitter(data);    
+
+    binary_transmitter();    
 }
-void binary_transmitter(char *digit){
+void binary_transmitter(){
     time_t start, diff;
     int i, ii;//iterators
     char a;
     char b = 0;
     for(ii=0; digit[ii]!=0; ii++){
+        //printf("%d", ii);
         start = clock();
+        diff = 0;//initializing diff so that the for loop executes
+        
         for(i=0; diff<500; i++){
-            if(digit[ii]=='0')a = b;
-            else{ 
-                asm("nop");
-                asm("nop");
-                asm("nop");
-                asm("nop"); 
-                asm("nop");
-                asm("nop");
-            }
+
             diff = clock() - start;
+        }
+        
+        
+        if(digit[ii]=='0'){
+            a = b;
+//        printf("0");
+        }
+        else{ 
+//      printf("1");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop");
+            asm("nop"); 
+            asm("nop");
+            asm("nop");
         }
     }
 }
