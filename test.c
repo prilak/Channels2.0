@@ -21,32 +21,37 @@ int main(int argc, char* argv[]) {
 
 
 int load_count(void){
-    time_t start = clock();// maybe remove declaration
-    time_t diff;
+    time_t start;// maybe remove declaration
+    //time_t diff;
     int i, dump[20000];
     char a;
     char b = 0;
     sleep(1);
     FILE *dump_file = fopen("dump.txt", "w");
     for(int again = 0; again<2000; again++){
-        
-        start = clock();
+        start = clock(); 
+        /*start = clock();
         diff = 0;
-        for(i = 0; diff<500; i++){
+        for(i = 0; diff<5000; i++){
             a = b;
             diff = clock() - start;  
+        }*/
+        i = 0;
+        while(clock() - start < 5000) {
+            a = b;
+            i++;
         }
-        if(again%200==0)printf("1 \n");
-//        if(again==1000){
-//            system("taskset -c 0 ./first_channel");//here is the transmitter
-//            dump[again] = 0;//shows where the transmitter begins in the .txt file
+        //if(again%200==0)printf("1 \n");
+        //if(again==1000){
+//          system("taskset -c 0 ./first_channel");//here is the transmitter
+//          dump[again] = 0;//shows where the transmitter begins in the .txt file
 //        }
         dump[again] = i;
         
         //diff = 0;
     }
     for(i=0;i<2000;i++){
-        fprintf(dump_file, "%d ", dump[i]);
+        fprintf(dump_file, "%d\n", dump[i]);
     }
     fclose(dump_file);
     
