@@ -5,6 +5,10 @@
 #include "test.h"
 #include "covert.h"
 
+//int main(){
+    
+//}
+
 //This function will find the highest cpu usage out of the four cpus
 int most_cpu_usage(){
     long double trash[4];
@@ -60,9 +64,7 @@ long double scan_string(FILE *folder, char *search_string){
     int found;
     for(i=0; i<12; i++){
         
-        //sscanf(folder, "%s", dump);
         fgets(dump, 2000, folder);
-        //printf("%s\n", dump);
         for(ii=0; ii<length; ii++){
             if(*(dump + ii)!=*(search_string + ii)){
                 found = 0;//not found
@@ -70,7 +72,7 @@ long double scan_string(FILE *folder, char *search_string){
             }
         }
         if(ii==length){
-            puts(dump);
+            //puts(dump);
             sscanf(dump, "%*s %Lf", &dump_num[0]);
             return dump_num[0];
         }
@@ -87,15 +89,11 @@ long double epoch(){
     long double seconds;
     cpu_folder = fopen("/proc/stat", "r");
     char *string = "btime";
-    //char *epoch_time;
     seconds = scan_string(cpu_folder, string);
     fclose(cpu_folder);
-    //sscanf(epoch_time, "%*s %Lf", &seconds);
 
     
-    //fscanf(cpu_folder, "%Lf", &seconds);
     return seconds;
-    //return 0;
 }
 
 
